@@ -36,13 +36,16 @@ then
     else
         echo "URL: $URL"
         echo "DATA: $DATA"
-        RESPSONSE=$(echo "$DATA" | http --print=b -A bearer -a $URL POST $URL | jq -e .)
+        RESPSONSE=$(echo "$DATA" | http --print=b -A bearer -a $URL POST $URL | jq .)
         echo "RESPONSE: $RESPSONSE"
-        if [ $? -ne 0 ]; then
-            echo "Error: Failed to create the release." >&2
+        HTTP_STATUS=$(echo "$RESPONSE" | jq -r '.status')
+
+        if [ "$HTTP_STATUS" -ne 201 ]; then
+            echo "Error: Failed to create the release. HTTP Status: $HTTP_STATUS"
             exit 1
+        else
+            echo "Release created successfully."
         fi
-        echo "Release created successfully."
     fi
 # otherwise
 else
