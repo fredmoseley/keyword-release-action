@@ -36,7 +36,7 @@ then
     else
         echo "URL: $URL"
         echo "DATA: $DATA"
-        RESPSONSE=$DATA | http --verbose --header "Accept: application/vnd.github.v3+json" --header "X-GitHub-Api-Version: 2022-11-28" POST $URL Authorization:"Bearer ${GITHUB_TOKEN}" | jq .
+        RESPSONSE=$DATA | http --debug -A bearer -a ${GITHUB_TOKEN} POST $URL | jq .
 
         echo "RESPONSE: $RESPSONSE"
         if [ $? -ne 0 ]; then
