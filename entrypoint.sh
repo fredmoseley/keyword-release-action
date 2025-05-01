@@ -39,8 +39,8 @@ then
         RESPSONSE=$(echo "$DATA" | http --print=b -A bearer -a $URL POST $URL | jq .)
         echo "RESPONSE: $RESPSONSE"
         HTTP_STATUS=$(echo "$RESPONSE" | jq -r '.status')
-
-        if [ "$HTTP_STATUS" -ne "201" ]; then
+        echo "HTTP_STATUS: $HTTP_STATUS"
+        if [ "$HTTP_STATUS" -ne 201 ]; then
             echo "Error: Failed to create the release. HTTP Status: $HTTP_STATUS"
             exit 1
         else
