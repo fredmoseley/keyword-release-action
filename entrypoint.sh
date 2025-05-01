@@ -34,8 +34,10 @@ then
     then
         echo "## [TESTING] Keyword was found but no release was created."
     else
+        echo "URL: $URL"
+        echo "DATA: $DATA"
         RESPSONSE=$DATA | http POST $URL Authorization:"Bearer ${GITHUB_TOKEN}" | jq .
-        echo "$RESPSONSE"
+        echo "RESPONSE: $RESPSONSE"
         if [ $? -ne 0 ]; then
             echo "Error: Failed to create the release." >&2
             exit 1
