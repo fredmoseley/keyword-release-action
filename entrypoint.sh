@@ -36,8 +36,7 @@ then
     else
         echo "URL: $URL"
         echo "DATA: $DATA"
-        RESPSONSE=$(echo "$DATA" | http --verbose -A bearer -a ${GITHUB_TOKEN} POST $URL)
-
+        RESPSONSE=$(echo "$DATA" | http --print=b -A bearer -a ${GITHUB_TOKEN} POST $URL | jq -e .)
         echo "RESPONSE: $RESPSONSE"
         if [ $? -ne 0 ]; then
             echo "Error: Failed to create the release." >&2
