@@ -36,7 +36,7 @@ then
     else
         echo "URL: $URL"
         echo "DATA: $DATA"
-        RESPSONSE=$DATA | http --verbose -A bearer -a ${GITHUB_TOKEN} POST $URL
+        RESPSONSE=$(echo "$DATA" | http --verbose -A bearer -a ${GITHUB_TOKEN} POST $URL)
 
         echo "RESPONSE: $RESPSONSE"
         if [ $? -ne 0 ]; then
