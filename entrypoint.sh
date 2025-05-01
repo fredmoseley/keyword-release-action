@@ -36,7 +36,7 @@ then
     else
         echo "URL: $URL"
         echo "DATA: $DATA"
-        RESPSONSE=$(echo "$DATA" | http --print=b -A bearer -a $URL POST $URL | jq .)
+        RESPONSE=$(echo "$DATA" | http --print=b -A bearer -a $URL POST $URL | jq .)
         echo "RESPONSE: $RESPSONSE"
         HTTP_STATUS=$(echo "$RESPONSE" | jq -r '.status')
         echo "HTTP_STATUS: $HTTP_STATUS"
