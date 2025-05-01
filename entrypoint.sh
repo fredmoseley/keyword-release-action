@@ -36,8 +36,8 @@ then
     else
         echo "URL: $URL"
         echo "DATA: $DATA"
-        RESPONSE=$(echo "$DATA" | http --print=b -A bearer -a $URL POST $URL | jq .)
-        echo "RESPONSE: $RESPSONSE"
+        RESPONSE=$(echo "$DATA" | http --print=b -A ${GITHUB_TOKEN} -a $URL POST $URL | jq .)
+        echo "RESPONSE: $RESPONSE"
         HTTP_STATUS=$(echo "$RESPONSE" | jq -r '.status')
         echo "HTTP_STATUS: $HTTP_STATUS"
         if [ "$HTTP_STATUS" -ne 201 ]; then
